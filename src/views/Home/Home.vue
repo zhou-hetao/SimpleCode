@@ -62,6 +62,10 @@
         <el-header>
           <div class="hearder_box">
             <p>欢迎{{ username }}登录</p>
+            <el-radio-group @change="handleChange" v-model="lang" style="float: right"> 
+        <el-radio label="zh">{{$t('message.zh')}}</el-radio>
+        <el-radio label="en">{{$t('message.en')}}</el-radio>
+      </el-radio-group>
             <!-- <el-button size="mini" type="primary" @click="Download">
            
           </el-button> -->
@@ -87,11 +91,13 @@
 <script>
 import { fileVue } from "@/api/file/index";
 import {getWindowInit} from "@/api/window/index"
+import { getLanguage } from '@/lang';
 export default {
   components: {},
   data() {
     return {
       username: "游客",
+      lang:"zh",
       downloadUrl: `${process.env.VUE_APP_BASE_URL}/api/download`, // 模板下载文件地址
       dialogImageUrl: '',
         dialogVisible: false
@@ -116,14 +122,20 @@ export default {
         this.dialogImageUrl = file.url;
         this.dialogVisible = true;
         console.log(this.dialogImageUrl);
+      },
+      handleChange(){
+        localStorage.setItem('language',this.lang)
+        this.$i18n.locale = getLanguage()
+        // location.reload()
       }
   },
   mounted() {
-    this.username = this.$store.state.user;
-    getWindowInit().then((res)=>{
-      console.log('电脑信息',res);
-    })
-    console.log(this.$store.state);
+    this.lang = localStorage.getItem('language')
+    // this.username = this.$store.state.user;
+    // getWindowInit().then((res)=>{
+    //   console.log('电脑信息',res);
+    // })
+    // console.log(this.$store.state);
   },
 };
 </script>

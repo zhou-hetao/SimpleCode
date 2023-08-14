@@ -1,7 +1,16 @@
 <template>
-  <div>
-    <h2>该页面不存在 This page does not exist</h2>
+  <div class="img_box">
+    <img src="../../assets/404.jpg" alt="">
   </div>
 </template>
 <script></script>
-<style></style>
+<style lang="scss" scoped>
+.img_box{
+  width: 100%;
+  height: 100vh;
+  img{
+    width: 100%;
+    height: 100%;
+  }
+}
+</style>

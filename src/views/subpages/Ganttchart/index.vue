@@ -3,7 +3,7 @@
       <div class="legend">
         <div class="legendBox">
           <div class="legendSml legendColor1"></div>
-          <div>计划时间</div>
+          <div>{{ $t('message.time') }}</div>
         </div>
         <div class="legendBox">
           <div class="legendSml legendColor2"></div>
