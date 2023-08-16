@@ -8,7 +8,7 @@ const resolve = dir => path.join(__dirname, dir)
  
 module.exports = {
   configureWebpack: {
-    name: 'vue Element Admin',
+    name: 'lowcode',
     resolve: {
       alias: {
         '@': resolve('src')
