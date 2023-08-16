@@ -1,6 +1,7 @@
 import axios from "axios"; //引入axios
 import { Message } from "element-ui";
 console.log("process.env", process.env);
+console.log('process.env.VUE_APP_BASE_URL + "/api",',process.env.VUE_APP_BASE_URL + "/api",);
 // 创建axios实例
 const service = axios.create({
   //这里拿开发接口测试
