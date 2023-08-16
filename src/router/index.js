@@ -78,6 +78,8 @@ const routes = [
 
 
 const router = new VueRouter({
+  mode: 'hash',
+  base: process.env.BASE_URL,
   routes
 })
 // 将新的路由配置添加到路由中
