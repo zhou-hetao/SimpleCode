@@ -85,7 +85,7 @@
           dispNo: null,
           scheduleNameCn: "审图",
           scheduleNameEn: "Plan Approval",
-          scheduleBeginDate: "2023-07-01",
+          scheduleBeginDate: "2023-07-18",
           scheduleEndDate: "2024-02-24",
           actualBeginDate:"2023-06-05",
           actualEndDate:"2023-07-28",
@@ -275,6 +275,46 @@
           fileIds: null,
           businessCode: null,
         },
+        {//实际开始  和  计划结束相等  ts13
+          id: "7086894358544252928894887478454",
+          nbProjectId: "7086894357860581376",
+          projectVesselId: "7086894358300983296",
+          vesselNameCn: "凯勇",
+          vesselNameEn: "NEW VALOR",
+          parentId: "0",
+          dispNo: 6,
+          scheduleNameCn: "结项1",
+          scheduleNameEn: "Delivery",
+          scheduleBeginDate: "2023-8-01",
+          scheduleEndDate: "2023-8-16",
+          actualBeginDate:"2023-8-16",
+          actualEndDate:"2023-8-24",
+          stageCode: "VESSEL_SCHEDULE_6",
+          completedPercent: 0,
+          scheduleRemark: null,
+          fileIds: null,
+          businessCode: null,
+        },
+        {//实际开始  和  计划结束相等   实际结束在计划结束后  l12s
+          id: "708689435854425292889488747854",
+          nbProjectId: "7086894357860581376",
+          projectVesselId: "7086894358300983296",
+          vesselNameCn: "凯勇",
+          vesselNameEn: "NEW VALOR",
+          parentId: "0",
+          dispNo: 6,
+          scheduleNameCn: "结项2",
+          scheduleNameEn: "Delivery",
+          scheduleBeginDate: "2023-8-01",
+          scheduleEndDate: "2023-8-16",
+          actualBeginDate:"2023-8-16",
+          actualEndDate:"2023-8-25",
+          stageCode: "VESSEL_SCHEDULE_6",
+          completedPercent: 0,
+          scheduleRemark: null,
+          fileIds: null,
+          businessCode: null,
+        },
       ];
       let currentDate = new Date();
         let year = currentDate.getFullYear();
@@ -337,7 +377,7 @@
           return (
             renderLabel(task.progress1 + task.progress2,3,task.state,0,true,0) +
             renderLabel(task.progress2+task.progress1, 2, task.state, 15, true, 0,) +
-            renderLabel(task.progress3 + task.progress2,1,task.state,-30,false,task.progress2)
+            renderLabel(task.progress3 + task.progress2,1,task.state,-30,false,task.progress1)
           );
         }else if (colorType === "b121") {
           return (
@@ -394,10 +434,20 @@
             // renderLabel(task.progress2, 2, task.state) +
             renderLabel(task.progress1 + task.progress2,1,task.state,0,false,0));
         } else if (colorType == "ts13") {
-            renderLabel(task.progress1 + task.progress2, 1, task.state) +
-            renderLabel(task.progress2, 2, task.state) +
-            renderLabel(task.progress1 + task.progress2,1,task.state,0,false,0);
-        } else {
+          return (
+            renderLabel(task.progress2, 1, task.state, 0, true,0) +
+            renderLabel(task.progress1, 2, task.state, 15, true, task.progress3) +
+            renderLabel(task.progress3,3,task.state,-30,true,task.progress2)
+          )
+          
+        }else if(colorType == "ts14"){
+          return (
+            renderLabel(task.progress1, 1, task.state, 0, true,0)
+            // renderLabel(task.progress1, 2, task.state, 15, true, task.progress3) +
+            // renderLabel(task.progress3,3,task.state,-30,true,task.progress2)
+          )
+        }
+         else {
           return (
             renderLabel(task.progress1 + task.progress2,1,task.state,0, true,0) +
             renderLabel(task.progress2, 2, task.state, 15, true, task.progress2) +
@@ -639,14 +689,15 @@
           progress2 = this.difference(Btime, Atime) / duration;
           progress3 = this.difference(Atime, Btime) / duration;
           progress1 = this.difference(Btime, Atime) / duration;
-        } else if (Dtime > Btime) {
+        } else if (Dtime > Btime && Ctime == Btime) {
           colorType = "ts13";
           // colorType = "l21";
           state = true;
           progress2 = this.difference(Atime, Btime) / duration;
           progress1 = this.difference(Ctime, Atime) / duration;
           progress3 = this.difference(Btime, Dtime) / duration;
-        } else {
+        }
+         else {
           colorType = "one";
           console.log("状态错误");
         }
